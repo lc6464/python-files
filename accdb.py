@@ -16,5 +16,5 @@ def cSQL(dbConn,sql):
 
 if __name__=='__main__':
     time.sleep(0.2)
-    for i in leSQL(r'D:\杂物\学生身份信息.accdb',"select 姓名 from 九年级 where 准考证号 like '17030090%'"):
+    for i in leSQL(r'D:\杂物\学生身份信息.accdb',"select 姓名 from 九年级 where 准考证号 like '17030061_'"):
         print(i[0])
