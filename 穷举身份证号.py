@@ -2,7 +2,6 @@ from urllib.request import urlopen
 from urllib.error import HTTPError, URLError
 from typing import Union
 import datetime
-import re
 from bs4 import BeautifulSoup as bs
 
 
@@ -49,9 +48,11 @@ def GetStudentData(id: Union[str, list]):
         return Get(id)
 
 
-def GetByDate(start: str, stop: str, sex: Union[int]):
-    """穷举的范围包括 start 但不包括 stop，均为日期，格式为 YYYY-mm-dd；sex 传入 0 为不指定，1 为男，2 为女。"""
-    if not sex in [0, 1, 2]:
+def GetByDate(start: str, stop: str, sex: Union[int, None] = None):
+    """穷举的范围包括 start 但不包括 stop，均为日期，格式为 YYYY-m-d；sex 传入 0 为不指定，1 为男，2 为女。"""
+    if sex == None:
+        sex = 0
+    elif sex not in [0, 1, 2]:
         raise Exception('性别指定错误！')
     students = []
     for date in GetDateRange(start, stop):
@@ -75,4 +76,4 @@ def GetByDate(start: str, stop: str, sex: Union[int]):
     return students
 
 
-# print(Get('2000-1-1', '2000-1-1'))
+# print(GetByDate('2000-1-1', '2000-1-2'))
